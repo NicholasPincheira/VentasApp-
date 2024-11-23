@@ -2,21 +2,25 @@ let deferredPrompt; // Variable para almacenar el evento `beforeinstallprompt`
 
 // Escucha el evento `beforeinstallprompt` y guarda el evento para mostrarlo más tarde
 window.addEventListener("beforeinstallprompt", (e) => {
+  // Previene la instalación automática
   e.preventDefault();
+  console.log("beforeinstallprompt fired");
   deferredPrompt = e;
 
-  // Muestra el botón de instalación
   const installBtn = document.getElementById("installBtn");
   installBtn.style.display = "block"; // Muestra el botón
 
   // Agrega el evento de clic al botón de instalación
   installBtn.addEventListener("click", () => {
-    installBtn.style.display = "none"; // Oculta el botón
-    deferredPrompt.prompt(); // Muestra el prompt de instalación
+    // Oculta el botón de instalación
+    installBtn.style.display = "none";
+    // Llama al prompt de instalación
+    deferredPrompt.prompt();
 
+    // Espera la respuesta del usuario
     deferredPrompt.userChoice.then((choiceResult) => {
       console.log(choiceResult.outcome); // Resultado de la instalación
-      deferredPrompt = null;
+      deferredPrompt = null; // Limpia el evento después de que se haya utilizado
     });
   });
 });

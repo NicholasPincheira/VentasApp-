@@ -1,0 +1,9 @@
+
+[
+    {
+        "name": "Realizar Calculos",
+        "url": "{% url 'calculate' %}",
+        "icon": "bx bx-calculator"
+    },
+    # ... other navigation link definitions ...
+]

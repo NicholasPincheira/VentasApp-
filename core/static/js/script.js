@@ -33,6 +33,20 @@ window.addEventListener("appinstalled", () => {
 document.addEventListener("DOMContentLoaded", function (event) {
   // Selecciona todos los enlaces con la clase 'nav-item'
   const navItems = document.querySelectorAll(".nav-item");
+  const installBtn = document.getElementById("installBtn");
+
+  // Actualiza el contenido del botón de instalación dependiendo de si el sidebar está abierto o cerrado
+  const updateInstallButton = () => {
+    if (nav.classList.contains("show")) {
+      // Si el sidebar está abierto, muestra el ícono y el texto
+      installBtn.style.display = "block";
+      installBtn.innerHTML = `<i class='bx bx-download nav-icon'></i><span class="nav_name">Instalar App</span>`;
+    } else {
+      // Si el sidebar está cerrado, muestra solo el ícono
+      installBtn.style.display = "block";
+      installBtn.innerHTML = `<i class='bx bx-download nav-icon'></i>`;
+    }
+  };
 
   // Obtén la URL actual
   const currentUrl = window.location.href;
@@ -102,5 +116,4 @@ document.addEventListener("DOMContentLoaded", function (event) {
   linkColor.forEach((l) => l.addEventListener("click", colorLink));
 
   // Your code to run since DOM is loaded and ready
-
 });

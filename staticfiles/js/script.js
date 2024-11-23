@@ -31,12 +31,22 @@ window.addEventListener("appinstalled", () => {
 });
 
 document.addEventListener("DOMContentLoaded", function (event) {
+  // Selecciona todos los enlaces con la clase 'nav-item'
+  const navItems = document.querySelectorAll(".nav-item");
 
-  const activeItem = document.getElementById('#nav-items-selector');
+  // Obtén la URL actual
+  const currentUrl = window.location.href;
 
-  if (activeItem){
-    console.log("capturado")
-  }
+  // Itera sobre los enlaces para encontrar cuál coincide con la URL actual
+  navItems.forEach((item) => {
+    if (item.href === currentUrl) {
+      // Si la URL del enlace coincide, añade la clase 'active'
+      item.classList.add("active");
+    } else {
+      // Asegúrate de que los demás no tengan la clase 'active'
+      item.classList.remove("active");
+    }
+  });
 
   if ("serviceWorker" in navigator) {
     navigator.serviceWorker
@@ -66,6 +76,14 @@ document.addEventListener("DOMContentLoaded", function (event) {
         bodypd.classList.toggle("body-pd");
         // add padding to header
         headerpd.classList.toggle("body-pd");
+
+        if (window.innerWidth <= 768) {
+          if (nav.classList.contains("show")) {
+            toggle.style.paddingLeft = "calc(var(--nav-width) + 100px)";
+          } else {
+            toggle.style.paddingLeft = ""; // Restaura el estilo en el menu
+          }
+        }
       });
     }
   };
@@ -84,4 +102,5 @@ document.addEventListener("DOMContentLoaded", function (event) {
   linkColor.forEach((l) => l.addEventListener("click", colorLink));
 
   // Your code to run since DOM is loaded and ready
+
 });

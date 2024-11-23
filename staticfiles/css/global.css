@@ -179,10 +179,34 @@ a {
     .body-pd {
         padding-left: calc(var(--nav-width) + 188px)
     }
+
+    .installBtn{
+        display: block;
+        padding: 9px 6px;
+        width: 119px;
+        align-self: center;
+        border-radius: 28px 28px 0px 0px;
+        margin-top: -38%;
+        cursor: pointer;
+    }
 }
 
 @media screen and (max-width: 768px) {
     .show {
         width: calc(var(--nav-width) + 156px);
     }
+
+    .installBtn{
+        display: block;
+        padding: 9px 6px;
+        width: 119px;
+        align-self: center;
+        border-radius: 28px 28px 0px 0px;
+        margin-top: -105%;
+        cursor: pointer;
+    }
+}
+
+.installBtn:hover{
+    filter: contrast(5);
 }

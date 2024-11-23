@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
           if (nav.classList.contains("show")) {
             toggle.style.paddingLeft = "calc(var(--nav-width) + 100px)";
           } else {
-            toggle.style.paddingLeft = ""; // Restaura el estilo cuando el menú se cierra
+            toggle.style.paddingLeft = ""; // Restaura el estilo en el menu
           }
         }
       });

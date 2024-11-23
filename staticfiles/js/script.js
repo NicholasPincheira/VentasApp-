@@ -1,4 +1,43 @@
+let deferredPrompt; // Variable para almacenar el evento `beforeinstallprompt`
+
+// Escucha el evento `beforeinstallprompt` y guarda el evento para mostrarlo más tarde
+window.addEventListener("beforeinstallprompt", (e) => {
+  // Previene la instalación automática
+  e.preventDefault();
+  console.log("beforeinstallprompt fired");
+  deferredPrompt = e;
+
+  const installBtn = document.getElementById("installBtn");
+  installBtn.style.display = "block"; // Muestra el botón
+
+  // Agrega el evento de clic al botón de instalación
+  installBtn.addEventListener("click", () => {
+    // Oculta el botón de instalación
+    installBtn.style.display = "none";
+    // Llama al prompt de instalación
+    deferredPrompt.prompt();
+
+    // Espera la respuesta del usuario
+    deferredPrompt.userChoice.then((choiceResult) => {
+      console.log(choiceResult.outcome); // Resultado de la instalación
+      deferredPrompt = null; // Limpia el evento después de que se haya utilizado
+    });
+  });
+});
+
+// Escucha si la aplicación ha sido instalada
+window.addEventListener("appinstalled", () => {
+  console.log("Aplicación instalada");
+});
+
 document.addEventListener("DOMContentLoaded", function (event) {
+
+  const activeItem = document.getElementById('#nav-items-selector');
+
+  if (activeItem){
+    console.log("capturado")
+  }
+
   if ("serviceWorker" in navigator) {
     navigator.serviceWorker
       .register("/static/js/serviceworker.js")
@@ -9,6 +48,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         console.log("Error al registrar el Service Worker:", error);
       });
   }
+
   const showNavbar = (toggleId, navId, bodyId, headerId) => {
     const toggle = document.getElementById(toggleId),
       nav = document.getElementById(navId),

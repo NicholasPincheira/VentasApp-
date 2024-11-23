@@ -31,6 +31,23 @@ window.addEventListener("appinstalled", () => {
 });
 
 document.addEventListener("DOMContentLoaded", function (event) {
+  // Selecciona todos los enlaces con la clase 'nav-item'
+  const navItems = document.querySelectorAll(".nav-item");
+
+  // Obtén la URL actual
+  const currentUrl = window.location.href;
+
+  // Itera sobre los enlaces para encontrar cuál coincide con la URL actual
+  navItems.forEach((item) => {
+    if (item.href === currentUrl) {
+      // Si la URL del enlace coincide, añade la clase 'active'
+      item.classList.add("active");
+    } else {
+      // Asegúrate de que los demás no tengan la clase 'active'
+      item.classList.remove("active");
+    }
+  });
+
   if ("serviceWorker" in navigator) {
     navigator.serviceWorker
       .register("/static/js/serviceworker.js")
@@ -59,6 +76,14 @@ document.addEventListener("DOMContentLoaded", function (event) {
         bodypd.classList.toggle("body-pd");
         // add padding to header
         headerpd.classList.toggle("body-pd");
+
+        if (window.innerWidth <= 768) {
+          if (nav.classList.contains("show")) {
+            toggle.style.paddingLeft = "calc(var(--nav-width) + 100px)";
+          } else {
+            toggle.style.paddingLeft = ""; // Restaura el estilo cuando el menú se cierra
+          }
+        }
       });
     }
   };
@@ -77,4 +102,5 @@ document.addEventListener("DOMContentLoaded", function (event) {
   linkColor.forEach((l) => l.addEventListener("click", colorLink));
 
   // Your code to run since DOM is loaded and ready
+
 });

@@ -11,7 +11,7 @@ import os
 import sys
 
 # Asegúrate de que el entorno virtual esté activado
-path = '/home/GabrielleReyes98/proyecto/VentasApp-'
+path = '/home/GabrielleReyes98/mysite/VentasApp-'
 if path not in sys.path:
     sys.path.append(path)
 
